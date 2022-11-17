@@ -1,0 +1,64 @@
+<tool id="table-union" name="Merge tabular datasets" version="0.1.0">
+    <description>by combining their rows and unionizing columns</description>
+    <requirements>
+        <!-- <requirement type="package" version="3.4">python</requirement> -->
+    </requirements>
+    <command detect_errors="exit_code"><![CDATA[
+    	#if $input_type.source_select == 'two'
+    	#set tables=($table_1, $table_2)
+    	#else
+    	#set tables=$input_type.tables
+    	#end if
+        python $__tool_directory__/table-union.py "$union"
+        #for $table in $tables
+            $table
+        #end for
+        > $combined_table
+    ]]></command>
+    <inputs>
+    	<param name="union" type="boolean" label="Attempt to unionize on an autodetected key column" checked="false" falsevalue="" />
+    	<conditional name="input_type">
+    		<param name="source_select" type="select" label="Mode">
+    			<option value="two">Combine two tables</option>
+    			<option value="collection">Combine a collection of tables</option>
+    		</param>
+    		<when value="collection">
+       			<param name="tables" type="data_collection" format="tabular,tsv" collection_type="list" />
+       		</when>
+       		<when value="two">
+       			<param name="table_1" type="data" format="tabular,tsv" />
+       			<param name="table_2" type="data" format="tabular,tsv" />
+       		</when>
+        </conditional>
+    </inputs>
+    <outputs>
+        <data name="combined_table" format="tsv" label="Combined table" />
+    </outputs>
+
+    <tests>
+        <test>
+        	<param name="source_select" value="collection" />
+        	<param name="union" value="true" />
+            <param name="tables">
+                <collection type="list">
+                    <element name="1" value="dingbat.tsv" />
+                    <element name="2" value="loki.tsv" />
+                </collection>
+            </param>
+            <output name="combined_table" value="combined.tsv" />
+        </test>
+        <test>
+        	<param name="source_select" value="two" />
+        	<param name="union" value="false" />
+        	<param name="table_1" value="dingbat.tsv" />
+        	<param name="table_2" value="loki.tsv" />
+        	<output name="combined_table" value="no_union.tsv" />
+        </test>
+    </tests>
+    <help><![CDATA[
+        Concatenate a collection of TSV files wile preserving and unionizing headers.
+    ]]></help>
+
+    <citations>
+    </citations>
+</tool>

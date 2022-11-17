@@ -1,0 +1,19 @@
+Summary:
+Wingstop:
+	 - X: 3 of 10
+Jason's Deli:
+	 - X: 2 of 10
+Moe's Southwest Grill:
+	 - X: 1 of 10
+Subway:
+	 - X: 1 of 10
+Taco Bell:
+	 - X: 3 of 10
+Popeyes Louisiana Kitchen:
+	 - X: 2 of 10
+Hardee's:
+	 - X: 1 of 10
+Taco Cabana:
+	 - X: 1 of 10
+Kenny Rogers Roasters:
+KFC:

@@ -1,0 +1,28 @@
+<tool id="table-summary" name="Summarize a tabular dataset" version="0.1.0">
+    <description>by counting unique values in columns</description>
+    <requirements>
+        <!-- <requirement type="package" version="3.4">python</requirement> -->
+    </requirements>
+    <command detect_errors="exit_code"><![CDATA[
+        python $__tool_directory__/table-summarize.py $table > $summary
+    ]]></command>
+    <inputs>
+        <param name="table" type="data" format="tsv" />
+    </inputs>
+    <outputs>
+        <data name="summary" format="txt" label="Summary" />
+    </outputs>
+
+    <tests>
+        <test>
+            <param name="table" value="summary_test.txt" />
+            <output name="summary" value="summary.txt" />
+        </test>
+    </tests>
+    <help><![CDATA[
+        Summarize tabular results by counting up unique values in columns.
+    ]]></help>
+
+    <citations>
+    </citations>
+</tool>

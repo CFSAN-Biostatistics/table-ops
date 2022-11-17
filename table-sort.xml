@@ -1,0 +1,34 @@
+<tool id="table-sort" name="Sort tabular dataset" version="0.1.0">
+    <description>on specified header or headers</description>
+    <requirements>
+        <!-- <requirement type="package" version="3.4">python3</requirement> -->
+    </requirements>
+    <command detect_errors="exit_code"><![CDATA[
+        cat $table | python $__tool_directory__/table-sort.py $headers > $sorted
+    ]]></command>
+    <inputs>
+        <param name="table" format="tsv" label="Table in TSV format to sort." type="data" />
+        <param name="headers" type="text" label="Space-delimited list of headers on which to sort." />
+    </inputs>
+    <outputs>
+        <data name="sorted" format="tsv" label="Sorted table" />
+    </outputs>
+    <tests>
+        <test>
+            <param name="table" value="combined.tsv" ftype="tsv" />
+            <param name="headers" value="flavor" />
+            <output name="sorted" value="sorted.tsv"/>
+        </test>
+        <test>
+            <param name="table" value="sort_test_multiple.txt" ftype="tsv" />
+            <param name="headers" value="A D" />
+            <output name="sorted" value="sort_test_multiple_sorted.txt"/>
+        </test>
+    </tests>
+    <help><![CDATA[
+        Sort a table, ascending, by one or more rows.
+    ]]></help>
+
+    <citations>
+    </citations>
+</tool>
