@@ -1,8 +1,4 @@
-FROM python:3.7-alpine
-
-RUN apk update && \
-    apk upgrade && \
-    apk add --no-cache bash
+FROM python:3.10-slim-bullseye
 
 COPY . /tools
 WORKDIR /tools
