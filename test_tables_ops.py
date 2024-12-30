@@ -27,10 +27,10 @@ class TestTableOps(unittest.TestCase):
 
     def test_table_union_union(self):
         returncode, stdout, stderr = self._run_command(
-            ["table-union", os.path.join(self.TEST_DATA_DIR, "union1.tsv"), os.path.join(self.TEST_DATA_DIR, "union2.tsv")]
+            ["table-union", os.path.join(self.TEST_DATA_DIR, "dingbat.tsv"), os.path.join(self.TEST_DATA_DIR, "loki.tsv")]
         )
         self.assertEqual(returncode, 0)
-        self._compare_tsv("union_expected.tsv", stdout)
+        self._compare_tsv("combined.tsv", stdout)
         self.assertEqual(stderr, "")
 
     def test_table_union_join(self):
