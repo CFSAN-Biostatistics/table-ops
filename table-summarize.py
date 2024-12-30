@@ -6,22 +6,30 @@ import csv
 import sys
 from collections import Counter, OrderedDict
 
+
 def main(table):
-	with open(table, 'rU') as table_f:
+	with open(table, 'r', newline='', encoding='utf-8') as table_f:  # Improved file opening
 		rdr = csv.DictReader(table_f, delimiter='\t', dialect='excel')
+
+		# Check if fieldnames exist before proceeding to avoid potential errors
+		if not rdr.fieldnames or len(rdr.fieldnames) <= 1:
+			print("No data columns found in the table.")
+			return
+
 		summary = OrderedDict()
-		data = list(rdr)
-		for name in rdr.fieldnames[1:]:
-			summary[name] = Counter([r[name] for r in data])
-		total = len(data)
+		for row in rdr:  # Iterate directly without creating a list in memory
+			for name in rdr.fieldnames[1:]:
+				summary.setdefault(name, Counter()).update([row[name]])  # More efficient counting
+
+		total = rdr.line_num - 1  # get the number of rows
+
 		print("Summary:")
 		for name, results in summary.items():
-			print('{}:'.format(name))
+			print(f'{name}:')  # f-string
 			for result, num in results.items():
 				if result:
-					print("\t - {}: {} of {}".format(result, num, total))
+					print(f"\t - {result}: {num} of {total}")  # f-string
 
-		
 
 if __name__ == '__main__':
 	main(sys.argv[1])
