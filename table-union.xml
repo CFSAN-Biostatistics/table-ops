@@ -1,4 +1,4 @@
-<tool id="table-union" name="Merge tabular datasets" version="0.1.0">
+<tool id="table-union" name="Table Union: Merge tabular datasets" version="0.1.0">
     <description>by combining their rows and unionizing columns</description>
     <requirements>
         <!-- <requirement type="package" version="3.4">python</requirement> -->

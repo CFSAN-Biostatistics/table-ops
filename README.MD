@@ -5,3 +5,5 @@
 Table-Union - unionize a bunch of tables with the same columns, or join a bunch of tables with matching keys.
 
 Table-Sort - sort a table according to a set of keys.
+
+Table-Summarize - summarize a tabular dataset by counting unique values in columns.
